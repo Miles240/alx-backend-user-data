@@ -28,7 +28,7 @@ def stats() -> str:
 
 
 @app_views.route("/unauthorized", methods=["GET"], strict_slashes=False)
-def unauthorized() -> str:
+def unauthorized() -> None:
     """GET /api/vi/unathorized
     Return:
         An unauthorized error message
@@ -37,7 +37,7 @@ def unauthorized() -> str:
 
 
 @app_views.route("/forbidden", methods=["GET"], strict_slashes=False)
-def forbidden() -> str:
+def forbidden() -> None:
     """GET /api/vi/forbidden
     Return:
         A forbidden error message
