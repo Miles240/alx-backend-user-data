@@ -48,7 +48,10 @@ class DB:
             raise invalid
 
     def update_user(self, user_id, **kwargs):
+        """Finds and updates a user"""
         user = self.find_user_by(id=user_id)
-        new_user = self._session.query(User).filter(User.id==user.id).update(kwargs)
-        session = self._session
-        session.commit()
+        new_user = self._session.query(User).filter(User.id == user.id).update(kwargs)
+        if new_user:
+            session = self._session
+            session.commit()
+        raise ValueError
