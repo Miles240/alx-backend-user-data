@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """DB module
 """
 
@@ -50,8 +51,7 @@ class DB:
     def update_user(self, user_id, **kwargs):
         """Finds and updates a user"""
         user = self.find_user_by(id=user_id)
-        new_user = self._session.query(User).filter(User.id == user.id)\
-            .update(kwargs)
+        new_user = self._session.query(User).filter(User.id == user.id).update(kwargs)
         if new_user:
             session = self._session
             session.commit()
