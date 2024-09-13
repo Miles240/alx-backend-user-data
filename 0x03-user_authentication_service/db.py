@@ -39,15 +39,20 @@ class DB:
         return new_user
 
     def find_user_by(self, **kwargs) -> Optional[User]:
-        """Finds a user from the database"""
-        all_user = self._session.query(User)
-        for k, v in kwargs.items():
-            if k not in User.__dict__:
-                raise InvalidRequestError
-            for usr in all_user:
-                if getattr(usr, k) == v:
-                    return usr
-        raise NoResultFound
+        """
+        Retrives a user from the database
+            Args:
+                kwargs(dict): a dictionary of attributes
+            Returns:
+                user(dict): the first user in the database
+        """
+        try:
+            user = self._session.query(User).filter_by(**kwargs).first()
+            if user is None:
+                raise NoResultFound
+            return user
+        except InvalidRequestError as invalid:
+            raise invalid
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """Finds and updates a user"""
