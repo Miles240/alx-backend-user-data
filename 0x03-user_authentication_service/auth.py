@@ -103,7 +103,7 @@ class Auth:
              Returns:
                 user's reset token
         """
-        user_uuid = str(uuid1())
+        user_uuid = uuid1()
         user = self._db.find_user_by(email=email)
         if user is None:
             raise ValueError
